@@ -1,2 +1,6 @@
 .DS_Store
-node_modules
+node-express# cat > .gitignore <<EOT 
+node_modules/
+.gitignore
+.elasticbeanstalk/
+EOT
