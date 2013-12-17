@@ -4,3 +4,4 @@ node_modules/
 .gitignore
 .elasticbeanstalk/
 EOT
+env.env
