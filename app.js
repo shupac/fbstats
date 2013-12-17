@@ -5,11 +5,12 @@ var path       = require('path');
 var db         = require('./models');
 var routes     = require('./routes');
 var user       = require('./routes/user');
+var twitter    = require('./server/twitter');
 var ejs        = require('ejs');
 
 // authentication dependencies
-var passport          = require("passport");
-var FacebookStrategy  = require('passport-facebook').Strategy;
+// var passport          = require("passport");
+// var FacebookStrategy  = require('passport-facebook').Strategy;
 
 var app = express();
 app.use(express.json());
@@ -20,17 +21,17 @@ app.set('port', process.env.PORT || 3000);
 
 
 // routes middleware
-app.use(express.cookieParser());
-app.use(express.bodyParser());
-app.use(express.session({ secret: 'SECRET' }));
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(express.cookieParser());
+// app.use(express.bodyParser());
+// app.use(express.session({ secret: 'SECRET' }));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-
+twitter.scrape();
 
 // directing routes
-app.get('/', routes.index);
-app.post('/users/create', user.create);
+app.post('/cities', twitter.query);
+app.post('/twitter', twitter.query);
 // app.post('/users/:user_id/tasks/create', task.create);
 // app.get('/users/:user_id/tasks/:task_id/destroy', task.destroy);
 
