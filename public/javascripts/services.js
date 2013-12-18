@@ -1,6 +1,20 @@
 angular.module('TwitterShopApp')
 .service('DateService', function($http) {
   var increment = 5;
+  var monthUTC = {
+    'Jan': 0,
+    'Feb': 1,
+    'Mar': 2,
+    'Apr': 3,
+    'May': 4,
+    'Jun': 5,
+    'Jul': 6,
+    'Aug': 7,
+    'Sep': 8,
+    'Oct': 9,
+    'Nov': 10,
+    'Dec': 11
+  }
   var service = {
     scrubData: function(tweets) {
       var data = [];
@@ -8,7 +22,15 @@ angular.module('TwitterShopApp')
       tweets.sort(function(a,b) {
         return new Date(a.created) - new Date(b.created);
       });
+
       service.startDate = new Date(tweets[0].created);
+
+      var dateArr = tweets[0].created.split(" ");
+      var year = dateArr[5];
+      var month = monthUTC[dateArr[1]];
+      var day = dateArr[2];
+
+      data.startDateUTC = Date.UTC(year, month, day);
 
       for(var i = 0; i < tweets.length; i++) {
         var count = 0;
@@ -90,7 +112,7 @@ angular.module('TwitterShopApp')
           type: 'column',
           name: 'Number of Tweets',
           pointInterval: 300 * 1000,
-          pointStart: Date.UTC(2013, 8, 18),
+          pointStart: tweetData.startDateUTC,
           data: tweetData
         }]
       });
