@@ -14,9 +14,14 @@ angular.module('TwitterShopApp')
     'Oct': 9,
     'Nov': 10,
     'Dec': 11
-  }
+  };
+  var UTCoffset = {
+    'San Francisco': 8 * 3600 * 1000,
+    'Chicago': 7 * 3600 * 1000,
+    'NYC': 6 * 3600 * 1000,
+  };
   var service = {
-    scrubData: function(tweets) {
+    scrubData: function(tweets, city) {
       var data = [];
       var max = 0;
       tweets.sort(function(a,b) {
@@ -30,7 +35,8 @@ angular.module('TwitterShopApp')
       var month = monthUTC[dateArr[1]];
       var day = dateArr[2];
 
-      data.startDateUTC = Date.UTC(year, month, day);
+      data.startDateUTC = Date.UTC(year, month, day) - UTCoffset[city];
+      data.city = city;
 
       for(var i = 0; i < tweets.length; i++) {
         var count = 0;
@@ -65,25 +71,25 @@ angular.module('TwitterShopApp')
       circleNyc.setAttribute('r', data.NYC.length/factor);
 
       circleSf.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.SF), 'San Francisco');
+        service.plot(DateService.scrubData(data.SF, 'San Francisco'));
       });
 
       circleChi.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.CHI), 'Chicago');
+        service.plot(DateService.scrubData(data.CHI, 'Chicago'));
       });
 
       circleNyc.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.NYC), 'NYC');
+        service.plot(DateService.scrubData(data.NYC, 'NYC'));
       });
     },
-    plot: function(tweetData, city) {
+    plot: function(tweetData) {
       $('#chart').highcharts({
         chart: {
           zoomType: 'x',
           spacingRight: 0
         },
         title: {
-          text: 'Tweets of "Shopping" in ' + city
+          text: 'Tweets of "Shopping" in ' + tweetData.city
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
