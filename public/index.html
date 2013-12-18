@@ -7,29 +7,25 @@
   <script src="javascripts/highcharts/highcharts.js"></script>
   <script src="javascripts/highcharts/exporting.js"></script>
   <script src="javascripts/app.js"></script>
+  <script src="javascripts/services.js"></script>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 <body ng-app="TwitterShopApp">
-  <div class="container" ng-controller="IndexCtrl">
+  <div class="map-container" ng-controller="IndexCtrl">
     <div class="map">
       <div class="circles">
         <svg>
-          <circle class="sf" cx="90" cy="185" fill="slategrey">
-          </circle>
-
-          <circle class="chi" cx="500" cy="145" fill="slategrey">
-          </circle>
-
-          <circle class="nyc" cx="665" cy="145" fill="slategrey">
-          </circle>
+          <circle class="sfPt" r="2" cx="102" cy="175"></circle>
+          <circle class="chiPt" r="2" cx="433" cy="156"></circle>
+          <circle class="nycPt" r="2" cx="560" cy="150"></circle>
+          <circle class="sf" cx="102" cy="175"></circle>
+          <circle class="chi" cx="433" cy="156"></circle>
+          <circle class="nyc" cx="560" cy="150"></circle>
         </svg>
       </div>
     </div>
 
-
-    <script src="javascripts/chart.js"></script>
-
-    <div id="chart" style="width: 700px; height: 300px; margin: 0"></div>
+    <div id="chart"></div>
 
   </div>
 </body>
