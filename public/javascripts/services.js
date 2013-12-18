@@ -1,19 +1,29 @@
 angular.module('TwitterShopApp')
 .service('DateService', function($http) {
   var increment = 5;
-  var startDate = new Date('Wed Dec 18 00:00:00 +0000 2013')
   var service = {
     scrubData: function(tweets) {
       var data = [];
-      for(var i = 0; i < 100; i++) {
-        data.push(0);
-      }
+      var max = 0;
+      tweets.sort(function(a,b) {
+        return new Date(a.created) - new Date(b.created);
+      });
+      service.startDate = new Date(tweets[0].created);
+
       for(var i = 0; i < tweets.length; i++) {
         var count = 0;
         var tweetDate = new Date(tweets[i].created);
-        var timeDiff = Math.floor((tweetDate - startDate)/1000/60); // mins
-        data[Math.floor(timeDiff/increment)-1]++;
+        var timeDiff = Math.floor((tweetDate - service.startDate)/1000/60); // mins
+        var histDiff = Math.floor(timeDiff/increment)-1;
+        if(histDiff > max) max = histDiff;
+        if(!data[histDiff]) data[histDiff] = 0;
+        data[histDiff]++;
       }
+
+      for(var i = 0; i < max; i++) {
+        data[i] = data[i] || 0;
+      }
+
       return data;
     }
   };

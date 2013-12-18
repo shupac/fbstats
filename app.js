@@ -13,10 +13,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.engine('html', ejs.renderFile);
 app.set('port', process.env.PORT || 3000);
 
-
 // directing routes
 app.get('/tweets', respond);
-
 
 // start server
 db.sequelize

@@ -9,9 +9,6 @@ var twitter = new Twitter({
 });
 
 exports.query = function(term, geocode, city, callback) {
-  // console.log('query term:', term);
-  // console.log('geocode:', geocode);
-
   twitter.search(term, {lang: 'en', count: 200, geocode: geocode}, function (data) {
     if(data.statuses) {
       for (var i = 0; i < data.statuses.length; i++) {
@@ -40,7 +37,6 @@ opts.geocodes = {
 
 var storeTweet = function(tweet_id, username, text, created, city) {
   // console.log(tweet_id, username, text, created, city, '\n');
-
   db.Tweet.find({where: {tweet_id:tweet_id}}).success(function(tweet) {
     if(!tweet) {
       var tweet = db.Tweet
@@ -52,7 +48,6 @@ var storeTweet = function(tweet_id, username, text, created, city) {
         })
         .success(function(tweet) {
           db.City.find({ where: {name: city}}).success(function(city) {
-            // console.log(city.name, city.id);
             tweet.setCity(city);
           });
         })
