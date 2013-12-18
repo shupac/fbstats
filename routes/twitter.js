@@ -13,13 +13,13 @@ exports.query = function(req, res) {
   console.log('query term:', term);
   console.log('geocode:', geocode);
 
-  twitter.search(term, {lang: 'en', count: 20, geocode: geocode}, function (data) {
+  twitter.search(term, {lang: 'en', count: 3, geocode: geocode}, function (data) {
     for (var i = 0; i < data.statuses.length; i++) {
       var tweet_id = data.statuses[i].id.toString();
       var username = data.statuses[i].user.screen_name;
       var text = data.statuses[i].text;
       var created = data.statuses[i].created_at;
-      // console.log(data.statuses[i]);
+
       console.log(tweet_id, username, text, created);
     }
     res.send();

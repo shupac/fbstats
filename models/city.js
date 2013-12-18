@@ -1,6 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
   var City = sequelize.define('City', {
-    name: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      unique: true
+    }
   }, {
     associate: function(models) {
       City.hasMany(models.Tweet);
