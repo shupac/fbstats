@@ -3,7 +3,6 @@ var express    = require('express');
 var http       = require('http');
 var path       = require('path');
 var db         = require('./models');
-var routes     = require('./routes');
 var twitter    = require('./server/twitter');
 var ejs        = require('ejs');
 
@@ -17,12 +16,16 @@ app.set('port', process.env.PORT || 3000);
 
 // directing routes
 // app.get('/cities', twitter.query);
-app.post('/tweets', twitter.query);
+app.get('/tweets', function(req, res) {
+  db.Tweet.findAll().success(function(tweets) {
+    res.send(tweets);
+  });
+});
 
 
 // start server
 db.sequelize
-  .sync({force: false})
+  .sync({force: true})
   .complete(function(err) {
     if (err) {
       throw err
