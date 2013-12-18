@@ -39,7 +39,7 @@ opts.geocodes = {
 };
 
 var storeTweet = function(tweet_id, username, text, created, city) {
-  console.log(tweet_id, username, text, created, city, '\n');
+  // console.log(tweet_id, username, text, created, city, '\n');
 
   db.Tweet.find({where: {tweet_id:tweet_id}}).success(function(tweet) {
     if(!tweet) {
@@ -73,7 +73,7 @@ exports.initialize = function() {
   db.City.findAll().success(function(cities) {
     if(cities.length) {
       scrape();
-      // setInterval(scrape, 15000);
+      setInterval(scrape, 15000);
     } else {
       db.City.bulkCreate([
         { name: 'SF' },
@@ -81,7 +81,7 @@ exports.initialize = function() {
         { name: 'NYC' }
       ]).success(function() {
         scrape();
-        // setInterval(scrape, 15000);
+        setInterval(scrape, 15000);
       });
     }
   });

@@ -15,17 +15,37 @@ app.set('port', process.env.PORT || 3000);
 
 
 // directing routes
-// app.get('/cities', twitter.query);
 app.get('/tweets', function(req, res) {
-  db.Tweet.findAll().success(function(tweets) {
-    res.send(tweets);
-  });
+  var response = {
+    SF: null,
+    CHI: null,
+    NYC: null
+  };
+
+  for(var i = 1; i <= 3; i++) {
+    (function(i) {
+      db.Tweet.findAll({where: {CityId: i}, include: [db.City]}).success(function(tweets) {
+        db.City.find({where: {id: i}}).success(function(city) {
+          console.log(i);
+          response[city.name] = tweets;
+          checkComplete();
+        });
+      });
+    })(i);
+  }
+
+  function checkComplete() {
+    for(var key in response) {
+      if(!response[key]) return;
+    }
+    res.send(response);
+  };
 });
 
 
 // start server
 db.sequelize
-  .sync({force: true})
+  .sync({force: false})
   .complete(function(err) {
     if (err) {
       throw err
