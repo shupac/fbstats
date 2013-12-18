@@ -6,6 +6,7 @@ app.controller('IndexCtrl', function($scope, $http, ChartService) {
     $http.get('/tweets')
     .success(function(data) {
       console.log(data);
+      $scope.tweets = data;
       ChartService.initialize(data);
     })
     .error(function(data){

@@ -12,6 +12,9 @@
 </head>
 <body ng-app="TwitterShopApp">
   <div class="map-container" ng-controller="IndexCtrl">
+    <div class="loading-modal" ng-hide="tweets">
+      Loading...
+    </div>
     <div class="map">
       <div class="circles">
         <svg>

@@ -51,3 +51,13 @@ a {
   top: 320px;
   left: 30px;
 }
+
+.loading-modal {
+  width: 650px;
+  padding: 30px;
+  position: relative;
+  top: 80px;
+  background-color: white;
+  opacity: 0.5;
+  z-index: 5;
+}

@@ -33,31 +33,31 @@ angular.module('TwitterShopApp')
       circleNyc.setAttribute('r', data.NYC.length/factor);
 
       circleSf.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.SF));
+        service.plot(DateService.scrubData(data.SF), 'San Francisco');
       });
 
       circleChi.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.CHI));
+        service.plot(DateService.scrubData(data.CHI), 'Chicago');
       });
 
       circleNyc.addEventListener('click', function() {
-        service.plot(DateService.scrubData(data.NYC));
+        service.plot(DateService.scrubData(data.NYC), 'NYC');
       });
     },
-    plot: function(tweetData) {
+    plot: function(tweetData, city) {
       $('#chart').highcharts({
         chart: {
           zoomType: 'x',
           spacingRight: 0
         },
         title: {
-          text: 'Shopping Tweets'
+          text: 'Tweets of "Shopping" in ' + city
         },
-        // subtitle: {
-        //     text: document.ontouchstart === undefined ?
-        //         'Click and drag in the plot area to zoom in' :
-        //         'Pinch the chart to zoom in'
-        // },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' :
+                'Pinch the chart to zoom in'
+        },
         xAxis: {
           type: 'datetime',
           maxZoom: 1 * 3600000,
