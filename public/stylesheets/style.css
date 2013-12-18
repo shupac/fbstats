@@ -5,3 +5,33 @@ body {
 a {
   color: #00b7ff;
 }
+
+.container {
+  position: relative;
+}
+
+.map {
+  position: absolute;
+  width: 800px;
+  height: 400px;
+  background: url('../images/map.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  top: -20px;
+  left: 50px;
+}
+
+.circles {
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: .5;
+}
+
+#chart {
+  position: relative;
+  top: 400px;
+  left: 70px;
+}

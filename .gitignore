@@ -5,3 +5,5 @@ node_modules/
 .elasticbeanstalk/
 EOT
 env.env
+Highcharts-3.0.7.zip
+Highcharts-3.0.7/

@@ -3,15 +3,34 @@
 <head>
   <title>TwitterShop</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="javascripts/highcharts/highcharts.js"></script>
+  <script src="javascripts/highcharts/exporting.js"></script>
   <script src="javascripts/app.js"></script>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 </head>
 <body ng-app="TwitterShopApp">
-  <div ng-controller="IndexCtrl">
-    <!-- <ul ng-repeat="tweet in tweets"> -->
-      <!-- <li>{{tweet.username}}: {{tweet.text}}, {{tweet.city.name}}</li> -->
-      <!-- <li>{{ tweet }}</li> -->
-    <!-- </ul> -->
+  <div class="container" ng-controller="IndexCtrl">
+    <div class="map">
+      <div class="circles">
+        <svg>
+          <circle class="sf" cx="90" cy="185" fill="slategrey">
+          </circle>
+
+          <circle class="chi" cx="500" cy="145" fill="slategrey">
+          </circle>
+
+          <circle class="nyc" cx="665" cy="145" fill="slategrey">
+          </circle>
+        </svg>
+      </div>
+    </div>
+
+
+    <script src="javascripts/chart.js"></script>
+
+    <div id="chart" style="width: 700px; height: 300px; margin: 0"></div>
+
   </div>
 </body>
 </html>
