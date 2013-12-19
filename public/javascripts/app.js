@@ -7,11 +7,17 @@ app.controller('IndexCtrl', function($scope, $http, ChartService) {
     .success(function(data) {
       console.log(data);
       $scope.tweets = data;
-      ChartService.initialize(data);
+      $scope.ready = true;
     })
     .error(function(data){
       console.log('get error: ', data);
     });
   };
+
+  $scope.show = function() {
+    $scope.ready = false;
+    ChartService.initialize($scope.tweets);
+  };
+
   $scope.getLinks();
 });
