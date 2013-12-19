@@ -69,9 +69,9 @@ angular.module('TwitterShopApp')
       var circleChi = document.querySelectorAll('circle.chi')[0];
       var circleNyc = document.querySelectorAll('circle.nyc')[0];
 
-      circleSf.setAttribute('r', data.SF.length/factorSF);
-      circleChi.setAttribute('r', data.CHI.length/factorCHI);
-      circleNyc.setAttribute('r', data.NYC.length/factorNYC);
+      animate(circleSf, data.SF.length/factorSF);
+      animate(circleChi, data.CHI.length/factorCHI);
+      animate(circleNyc, data.NYC.length/factorNYC);
 
       circleSf.addEventListener('click', function() {
         service.plot(DateService.scrubData(data.SF, 'San Francisco'));
@@ -84,6 +84,20 @@ angular.module('TwitterShopApp')
       circleNyc.addEventListener('click', function() {
         service.plot(DateService.scrubData(data.NYC, 'NYC'));
       });
+
+      function animate (target, size) {
+        // create the <animation> element
+        var animation = document.createElementNS('http://www.w3.org/2000/svg', 'animate');
+        // set its attributes
+        animation.setAttributeNS(null, 'begin', 'indefinite');
+        animation.setAttributeNS(null, 'attributeName', 'r');
+        animation.setAttributeNS(null, 'from', '0');
+        animation.setAttributeNS(null, 'to', size);
+        animation.setAttributeNS(null, 'dur', '0.5s');
+        animation.setAttributeNS(null, 'fill', 'freeze');
+        target.appendChild(animation);
+        animation.beginElement();
+      };
     },
     plot: function(tweetData) {
       $('#chart').highcharts({
