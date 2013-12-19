@@ -17,8 +17,8 @@ angular.module('TwitterShopApp')
   };
   var UTCoffset = {
     'San Francisco': 8 * 3600 * 1000,
-    'Chicago': 7 * 3600 * 1000,
-    'NYC': 6 * 3600 * 1000,
+    'Chicago': 6 * 3600 * 1000,
+    'NYC': 5 * 3600 * 1000,
   };
   var service = {
     scrubData: function(tweets, city) {
