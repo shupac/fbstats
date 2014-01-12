@@ -61,17 +61,17 @@ angular.module('TwitterShopApp')
   var service = {
     initialize: function(data) {
       // corrects for population density and resizes circle
-      var factorSF = data.NYC.length / (80 / 1.7 * 2.7);
-      var factorCHI = data.NYC.length / (80 / 1.2 * 2.7);
-      var factorNYC = data.NYC.length / (80 / 2.7 * 2.7);
+      var factorSF = Math.sqrt(data.NYC.length) / (80 / 1.7 * 2.7);
+      var factorCHI = Math.sqrt(data.NYC.length) / (80 / 1.2 * 2.7);
+      var factorNYC = Math.sqrt(data.NYC.length) / (80 / 2.7 * 2.7);
 
       var circleSf = document.querySelectorAll('circle.sf')[0];
       var circleChi = document.querySelectorAll('circle.chi')[0];
       var circleNyc = document.querySelectorAll('circle.nyc')[0];
 
-      animate(circleSf, data.SF.length/factorSF);
-      animate(circleChi, data.CHI.length/factorCHI);
-      animate(circleNyc, data.NYC.length/factorNYC);
+      animate(circleSf, Math.sqrt(data.SF.length)/factorSF);
+      animate(circleChi, Math.sqrt(data.CHI.length)/factorCHI);
+      animate(circleNyc, Math.sqrt(data.NYC.length)/factorNYC);
 
       circleSf.addEventListener('click', function() {
         service.plot(DateService.scrubData(data.SF, 'San Francisco'));

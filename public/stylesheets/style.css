@@ -54,6 +54,10 @@ a {
 
 .loading-modal {
   width: 650px;
+}
+
+.loading-modal {
+  width: 650px;
   padding: 30px;
   position: relative;
   top: 80px;
@@ -74,4 +78,9 @@ a {
   font-weight: 100;
   z-index: 5;
   cursor: pointer;
+}
+
+.stats {
+  position: absolute;
+  z-index: 6;
 }

@@ -23,7 +23,7 @@ db.sequelize
     if (err) {
       throw err
     } else {
-      twitter.initialize();
+      // twitter.initialize();
       http.createServer(app).listen(app.get('port'), function(){
         console.log('Express server listening on port ' + app.get('port'));
       });

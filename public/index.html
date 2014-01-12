@@ -12,11 +12,18 @@
 </head>
 <body ng-app="TwitterShopApp">
   <div class="map-container" ng-controller="IndexCtrl">
-    <div class="loading-modal" ng-hide="tweets">
-      Loading...
-    </div>
-    <div class="show-modal" ng-show="ready">
-      <button ng-click="show()">Show</button>
+    <div class="modal-container">
+      <div class="loading-modal" ng-hide="tweets">
+        Loading...
+      </div>
+      <div class="show-modal" ng-show="ready">
+        <button ng-click="show()">Show</button>
+      </div>
+
+<!--       <div class="stats">
+        Stats for "shopping" tweets in the US
+      </div>
+ -->
     </div>
     <div class="map">
       <div class="circles">
